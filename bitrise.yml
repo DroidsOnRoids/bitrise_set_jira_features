@@ -5,7 +5,7 @@ app:
   envs:
   - BITRISE_STEP_ID: feature-list-for-release-notes
   - BITRISE_STEP_VERSION: "0.0.1"
-  - BITRISE_STEP_GIT_CLONE_URL: git@github.com:DroidsOnRoids/bitrise_set_jira_features.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/DroidsOnRoids/bitrise_set_jira_features.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: git@github.com:DroidsOnRoids/bitrise-steplib.git
 
 workflows:
