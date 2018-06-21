@@ -71,6 +71,9 @@ inputs:
         is_expand: true
         is_required: true
 outputs:
-  - GIT_RELEASE_NOTES:
+  - FEATURES_FROM_COMMITS:
     opts:
       title: "List of features as jira links"
+  - EPICS_FROM_TAGS:
+    opts:
+      title: "List of epics with title and jira links"
