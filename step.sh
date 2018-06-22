@@ -2,10 +2,14 @@
 
 set -e
 
+git fetch --tags
+
 tags="$(git tag | grep "$jira_project_prefix[0-9]{0,5}_.*" -E -o)"
 
 tags=($(echo "$tags" | tr ' ' '\n'))
 
+if (( ${#tags[*]} > 0 ))
+then
 last_index=0
 for (( i=0 ; i<${#tags[*]} ; ++i ))
 do
@@ -45,6 +49,7 @@ fi
 done
 
 envman add --key EPICS_FROM_TAGS --value "$epics"
+fi
 
 echo "Epics featured:"
 echo ""
