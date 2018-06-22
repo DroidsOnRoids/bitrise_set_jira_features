@@ -55,9 +55,9 @@ echo "Epics featured:"
 echo ""
 envman run bash -c 'echo "$EPICS_FROM_TAGS"'
 
-JIRA_ESCAPED_URL=$(echo ${jira_project_prefix} | sed -e "s#/#\\\/#g")
+JIRA_ESCAPED_URL=$(echo ${jira_default_url} | sed -e "s#/#\\\/#g")
 
-git log --pretty=format:"%s" | grep "$jira_default_url[0-9]{0,5}" -o -E | sort -u -r | sed -e 's/^/'${JIRA_ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
+git log --pretty=format:"%s" | grep "$jira_project_prefix[0-9]{0,5}" -o -E | sort -u -r | sed -e 's/^/'${JIRA_ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
 
 echo "Features:"
 echo ""
