@@ -8,11 +8,19 @@
 # - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
 
 title: |-
-  Feature list for release notes
+  Features and epics list for release notes
 summary: |
-  Creates a list of features gathered from git commits using given pattern.
+  Creates a list of features and gathered from git commits and tags using given pattern.
 description: |
-  Feature descriptions are derived from commit messages. Using given pattern, one can create a list of the featurees based on previous commits. Also a alternative use would be to create links to appropriate features in the backlog system.
+  Feature descriptions are derived from commit messages. List of the features is based on previous commits messages.
+  
+  The regex pattern to look for features is "<project_prefix>[0-9]{0,5}"
+  
+  Epics are derived from tags.
+  
+  The regex pattern to look for epics is "<project_prefix>[0-9]{0,5}_"
+  
+  An alternative use, would be to create links to appropriate features and epics in the backlog system using the <default_backlog_url> variable.
 website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
@@ -42,7 +50,7 @@ host_os_tags:
 # You can find more information about type tags in the Step Development Guideline:
 # https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
 type_tags:
-  - artifact-info
+  - utility
 
 is_requires_admin_user: false
 is_always_run: false
@@ -60,20 +68,40 @@ toolkit:
     entry_file: step.sh
 
 inputs:
-  - jira_default_url:
+  - backlog_default_url:
     opts:
-      title: "Jira Base URL"
+      title: "Default URL for the backlog system"
+      description: |
+        Base URL for prefixing the features and epics.
+        
+        e.g. "https://example.com/"
+        
+        Can be empty.
       is_expand: true
       is_required: true
-  - jira_project_prefix:
+  - project_prefix:
     opts:
-        title: "Jira project prefix"
-        is_expand: true
-        is_required: true
+      title: "Project prefix"
+      description: |
+        Project prefix to search for features and epics.
+        
+        e.g. "PROJ-"
+        
+        Can be empty.
+      is_expand: true
+      is_required: true
 outputs:
   - FEATURES_FROM_COMMITS:
     opts:
-      title: "List of features as jira links"
+      title: "List of features derived from commits"
+      description: |
+        If the backlog_default_url is specified, each element is prefixed with the given URL
+        
+        e.g. https://example.com/PROJ-1
   - EPICS_FROM_TAGS:
     opts:
-      title: "List of epics with title and jira links"
+      title: "List of epics with titles derived from tags"
+      description: |
+        If the backlog_default_url is specified, each element is prefixed with the given URL
+        
+        e.g. https://example.com/PROJ-1

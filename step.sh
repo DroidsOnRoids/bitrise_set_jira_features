@@ -4,7 +4,7 @@ set -e
 
 git fetch --tags
 
-tags="$(git tag | grep "$jira_project_prefix[0-9]{0,5}_.*" -E -o)"
+tags="$(git tag | grep "$project_prefix[0-9]{0,5}_.*" -E -o)"
 
 tags=($(echo "$tags" | tr ' ' '\n'))
 
@@ -40,7 +40,7 @@ epics=""
 for (( i=0 ; i<${#tags_list[*]} ; i+=2 ))
 do
 
-epics+="${tags_list[$((i + 1))]}"$'\n'$'\n'$'\t'"$jira_default_url${tags_list[$i]}"
+epics+="${tags_list[$((i + 1))]}"$'\n'$'\n'$'\t'"$backlog_default_url${tags_list[$i]}"
 if (( i < ${#tags_list[*]} - 1 ))
 then
 epics+=$'\n'$'\n'
@@ -55,9 +55,9 @@ echo "Epics featured:"
 echo ""
 envman run bash -c 'echo "$EPICS_FROM_TAGS"'
 
-JIRA_ESCAPED_URL=$(echo ${jira_default_url} | sed -e "s#/#\\\/#g")
+ESCAPED_URL=$(echo ${backlog_default_url} | sed -e "s#/#\\\/#g")
 
-git log --pretty=format:"%s" | grep "$jira_project_prefix[0-9]{0,5}" -o -E | sort -u -r | sed -e 's/^/'${JIRA_ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
+git log --pretty=format:"%s" | grep "$project_prefix[0-9]{0,5}" -o -E | sort -u -r | sed -e 's/^/'${ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
 
 echo "Features:"
 echo ""
