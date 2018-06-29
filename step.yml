@@ -13,9 +13,9 @@ summary: |
   Creates a list of features gathered from git commits using given pattern.
 description: |
   Feature descriptions are derived from commit messages. Using given pattern, one can create a list of the featurees based on previous commits. Also a alternative use would be to create links to appropriate features in the backlog system.
-website: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
-source_code_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
-support_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes/issues
+website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
