@@ -8,6 +8,8 @@ tags="$(git tag | grep "$project_prefix[0-9]{0,5}_.*" -E -o)"
 
 tags=($(echo "$tags" | tr ' ' '\n'))
 
+epics=""
+
 if (( ${#tags[*]} > 0 ))
 then
 last_index=0
@@ -35,12 +37,11 @@ tags_list[$last_index]="$tag_title"
 last_index=$((last_index + 1))
 done
 
-epics=""
-
 for (( i=0 ; i<${#tags_list[*]} ; i+=2 ))
 do
 
 epics+="${tags_list[$((i + 1))]}"$'\n'$'\n'$'\t'"$backlog_default_url${tags_list[$i]}"
+
 if (( i < ${#tags_list[*]} - 1 ))
 then
 epics+=$'\n'$'\n'
@@ -48,8 +49,9 @@ fi
 
 done
 
-envman add --key EPICS_FROM_TAGS --value "$epics"
 fi
+
+envman add --key EPICS_FROM_TAGS --value "$epics"
 
 echo "Epics featured:"
 echo ""
@@ -57,7 +59,7 @@ envman run bash -c 'echo "$EPICS_FROM_TAGS"'
 
 ESCAPED_URL=$(echo ${backlog_default_url} | sed -e "s#/#\\\/#g")
 
-git log --pretty=format:"%s" | grep "$project_prefix[0-9]{0,5}" -o -E | sort -u -r | sed -e 's/^/'${ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
+git log --pretty=format:"%s" | grep "$project_prefix[0-9]{0,5}" -o -E | sort -u -r --version-sort | sed -e 's/^/'${ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
 
 echo "Features:"
 echo ""
