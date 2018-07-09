@@ -14,11 +14,11 @@ summary: |
 description: |
   Feature descriptions are derived from commit messages. List of the features is based on previous commits messages.
   
-  The regex pattern to look for features is "<project_prefix>[0-9]{0,5}"
+  The regex pattern to look for features is "<project_prefix>[0-9]{1,5}"
   
   Epics are derived from tags.
   
-  The regex pattern to look for epics is "<project_prefix>[0-9]{0,5}_"
+  The regex pattern to look for epics is "<project_prefix>[0-9]{1,5}_"
   
   An alternative use, would be to create links to appropriate features and epics in the backlog system using the <default_backlog_url> variable.
 website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
