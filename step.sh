@@ -4,7 +4,7 @@ set -e
 
 git fetch --tags
 
-tags="$(git tag | grep "$project_prefix[0-9]{0,5}_.*" -E -o)"
+tags="$(git tag | grep "$project_prefix[0-9]{1,5}_.*" -E -o || true)"
 
 tags=($(echo "$tags" | tr ' ' '\n'))
 
@@ -59,7 +59,7 @@ envman run bash -c 'echo "$EPICS_FROM_TAGS"'
 
 ESCAPED_URL=$(echo ${backlog_default_url} | sed -e "s#/#\\\/#g")
 
-git log --pretty=format:"%s" | grep "$project_prefix[0-9]{0,5}" -o -E | sort -u -r --version-sort | sed -e 's/^/'${ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
+git log --pretty=format:"%s" | grep "$project_prefix[0-9]{1,5}" -o -E | sort -u -r --version-sort | sed -e 's/^/'${ESCAPED_URL}'/' | envman add --key FEATURES_FROM_COMMITS
 
 echo "Features:"
 echo ""
