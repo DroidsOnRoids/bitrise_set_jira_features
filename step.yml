@@ -10,7 +10,7 @@
 title: |-
   Features and epics list for release notes
 summary: |
-  Creates a list of features and gathered from git commits and tags using given pattern.
+  Creates a list of features and epics gathered from git commits and tags using given pattern.
 description: |
   Feature descriptions are derived from commit messages. List of the features is based on previous commits messages.
   
